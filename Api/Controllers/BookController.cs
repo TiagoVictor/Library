@@ -40,5 +40,31 @@ namespace Api.Controllers
                 _ => BadRequest(500)
             };
         }
+
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] BookDto dto,
+            [FromQuery] int id)
+        {
+            var request = new UpdateBookRequest
+            {
+                Data = dto,
+                Id = id
+            };
+
+            var res = await _bookManager.UpdateBook(request);
+
+            if (res.Success) return Ok(res.Data);
+
+            return res.ErrorCode switch
+            {
+                ErrorCode.BOOK_INVALID_NAME => BadRequest(res),
+                ErrorCode.BOOK_INVALID_AUTHOR => BadRequest(res),
+                ErrorCode.BOOK_INVALID_EDITION => BadRequest(res),
+                ErrorCode.BOOK_INVALID_BIO => BadRequest(res),
+                ErrorCode.BOOK_INVALID_PUBLISING_COMPANY => BadRequest(res),
+                ErrorCode.BOOK_INVALID_PAGE => BadRequest(res),
+                _ => BadRequest(500)
+            };
+        }
     }
 }

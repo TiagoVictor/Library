@@ -10,7 +10,7 @@
         BOOK_INVALID_PAGE = 5,
         BOOK_INVALID_EDITION = 6,
         BOOK_COLD_NOT_SAVE = 7,
-        BOOK_COKD_NOT_UPDATE = 8,
+        BOOK_COLD_NOT_UPDATE = 8,
     }
 
     public abstract class Response

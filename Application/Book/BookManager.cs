@@ -123,15 +123,93 @@ namespace Application.Book
             };
         }
 
-        public BookResponse UpdateBook(UpdateBookRequest request)
+        public async Task<BookResponse> UpdateBook(UpdateBookRequest request)
         {
-            var book = BookDto.MapToEntity(request.Data ?? new());
-            _bookRepository.UpdateBook(book);
-
-            return new BookResponse
+            try
             {
-                Data = request.Data
-            };
+                var book = await _bookRepository.GetBookByIdAsync(request.Id);
+
+                book.Name = request.Data.Name;
+                book.Bio = request.Data.Bio;
+                book.Pages = request.Data.Pages;
+                book.Author = request.Data.Author;
+                book.Edition = request.Data.Edition;
+                book.PublishingCompany = request.Data.PublishingCompany;
+
+                await book.Save(_bookRepository);
+
+                request.Data.Id = book.Id;
+
+                return new BookResponse
+                {
+                    Success = true,
+                    Data = request.Data
+                };
+            }
+            catch (InvalidNameException ex)
+            {
+                return new BookResponse
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    ErrorCode = ErrorCode.BOOK_INVALID_NAME
+                };
+            }
+            catch (InvalidBioException ex)
+            {
+                return new BookResponse
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    ErrorCode = ErrorCode.BOOK_INVALID_BIO
+                };
+            }
+            catch (InvalidAuthorException ex)
+            {
+                return new BookResponse
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    ErrorCode = ErrorCode.BOOK_INVALID_AUTHOR
+                };
+            }
+            catch (InvalidPublishingCompanyException ex)
+            {
+                return new BookResponse
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    ErrorCode = ErrorCode.BOOK_INVALID_PUBLISING_COMPANY
+                };
+            }
+            catch (InvalidPagesException ex)
+            {
+                return new BookResponse
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    ErrorCode = ErrorCode.BOOK_INVALID_PAGE
+                };
+            }
+            catch (InvalidEditionException ex)
+            {
+                return new BookResponse
+                {
+                    Success = false,
+                    Message = ex.Message,
+                    ErrorCode = ErrorCode.BOOK_INVALID_EDITION
+                };
+            }
+            catch (Exception)
+            {
+
+                return new BookResponse
+                {
+                    Success = false,
+                    Message = "There was an error while updatind.",
+                    ErrorCode = ErrorCode.BOOK_COLD_NOT_UPDATE
+                };
+            }
         }
     }
 }
