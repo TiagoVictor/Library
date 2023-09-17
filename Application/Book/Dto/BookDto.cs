@@ -12,7 +12,7 @@ namespace Application.Book.Dto
         public int Edition { get; set; }
         public string PublishingCompany { get; set; } = string.Empty;
 
-        public  static Entity.Book MapToEntity (BookDto dto)
+        public static Entity.Book MapToEntity(BookDto dto)
         {
             return new Entity.Book
             {
@@ -26,7 +26,7 @@ namespace Application.Book.Dto
             };
         }
 
-        public static BookDto MapToDto (Entity.Book book)
+        public static BookDto MapToDto(Entity.Book book)
         {
             return new BookDto
             {
@@ -34,7 +34,7 @@ namespace Application.Book.Dto
                 Name = book.Name,
                 Bio = book.Bio,
                 Author = book.Author,
-                Pages= book.Pages,
+                Pages = book.Pages,
                 Edition = book.Edition,
                 PublishingCompany = book.PublishingCompany
             };

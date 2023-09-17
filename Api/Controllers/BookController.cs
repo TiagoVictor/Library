@@ -38,7 +38,7 @@ namespace Api.Controllers
                 ErrorCode.BOOK_INVALID_PUBLISING_COMPANY => BadRequest(res),
                 ErrorCode.BOOK_INVALID_PAGE => BadRequest(res),
                 _ => BadRequest(500)
-            };;
+            };
         }
     }
 }

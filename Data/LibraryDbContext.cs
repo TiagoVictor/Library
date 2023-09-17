@@ -1,4 +1,4 @@
-﻿using Entities =  Domain.Book.Entities;
+﻿using Entities = Domain.Book.Entities;
 using Microsoft.EntityFrameworkCore;
 using Data.Book.Mapping;
 
