@@ -129,6 +129,16 @@ namespace Application.Book
             {
                 var book = await _bookRepository.GetBookByIdAsync(request.Id);
 
+                if (book == null)
+                {
+                    return new BookResponse
+                    {
+                        Success = false,
+                        ErrorCode = ErrorCode.BOOK_NOT_FOUND,
+                        Message = "Not found"
+                    };
+                }
+
                 book.Name = request.Data.Name;
                 book.Bio = request.Data.Bio;
                 book.Pages = request.Data.Pages;

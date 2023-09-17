@@ -40,6 +40,8 @@ namespace Domain.Book.Entities
 
             if (Id == 0)
                 Id = await repository.CreateAsync(this);
+            else
+                repository.UpdateBook(this);
         }
     }
 }

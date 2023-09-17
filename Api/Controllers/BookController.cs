@@ -66,5 +66,23 @@ namespace Api.Controllers
                 _ => BadRequest(500)
             };
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            var books = await _bookManager
+                .GetBooksAsync();
+
+            return Ok(books.Books);
+        }
+
+        [HttpGet("id")]
+        public async Task<ActionResult> GetById(int id)
+        {
+            var book = await _bookManager
+                .GetBookByIdAsync(id);
+
+            return Ok(book.Data);
+        }
     }
 }
