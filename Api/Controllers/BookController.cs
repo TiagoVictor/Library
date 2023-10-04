@@ -27,7 +27,7 @@ namespace Api.Controllers
 
             var res = await _bookManager.CreateAsync(request);
 
-            if (res.Success) return Created("", res.Data);
+            if (res.Success) return Created("", res);
 
             return res.ErrorCode switch
             {
@@ -53,7 +53,7 @@ namespace Api.Controllers
 
             var res = await _bookManager.UpdateBook(request);
 
-            if (res.Success) return Ok(res.Data);
+            if (res.Success) return Ok(res);
 
             return res.ErrorCode switch
             {
@@ -63,6 +63,7 @@ namespace Api.Controllers
                 ErrorCode.BOOK_INVALID_BIO => BadRequest(res),
                 ErrorCode.BOOK_INVALID_PUBLISING_COMPANY => BadRequest(res),
                 ErrorCode.BOOK_INVALID_PAGE => BadRequest(res),
+                ErrorCode.BOOK_NOT_FOUND => BadRequest(res),
                 _ => BadRequest(500)
             };
         }
