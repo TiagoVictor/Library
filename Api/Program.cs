@@ -1,8 +1,12 @@
 using Application.Book;
 using Application.Book.Ports;
+using Application.User;
+using Application.User.Ports;
 using Data;
 using Data.Book;
+using Data.User;
 using Domain.Book.Ports;
+using Domain.User.Ports;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +30,9 @@ builder.Services.AddControllers();
 #region IOC
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookManager, BookManager>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserManager, UserManager>();
 #endregion
 
 var connectionString = builder.Configuration.GetConnectionString("Main");

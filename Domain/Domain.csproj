@@ -9,6 +9,10 @@
   <ItemGroup>
     <Folder Include="Book\Enum\" />
     <Folder Include="Book\ValueObjects\" />
+    <Folder Include="Role\Enum\" />
+    <Folder Include="Role\ValueObjects\" />
+    <Folder Include="User\Enum\" />
+    <Folder Include="User\ValueObjects\" />
   </ItemGroup>
 
 </Project>

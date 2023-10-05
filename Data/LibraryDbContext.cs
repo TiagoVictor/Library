@@ -1,4 +1,5 @@
-﻿using Entities = Domain.Book.Entities;
+﻿using BookEntitie = Domain.Book.Entities;
+using UserEntitie = Domain.User.Entities;
 using Microsoft.EntityFrameworkCore;
 using Data.Book.Mapping;
 
@@ -8,7 +9,8 @@ namespace Data
     {
         public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options) { }
 
-        public DbSet<Entities.Book> Books { get; set; }
+        public DbSet<BookEntitie.Book> Books { get; set; }
+        public DbSet<UserEntitie.User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
